@@ -13,15 +13,15 @@ Create the Dockerfile
 ---------------------
 
 Create a file named "Dockerfile" (it may have already been created in this example).
-This file is used for giving Docker the instruction on how to setup itself (the "image")
-and what command to run when it is called by Docker to run.
+This file is used for giving Docker the instructions on how to setup itself (the "image")
+and which commands to run when it is called by Docker to run.
 
 Add the Docker setup commands
 -----------------------------
 
 Copy and paste this into Dockerfile.
 
-~~~bash
+~~~dockerfile
 # Create the Docker instance based on Ubuntu v16.04.
 FROM ubuntu:16.04
 
@@ -79,7 +79,7 @@ Docker Image vs. Container
 
 (source: http://stackoverflow.com/questions/23735149/docker-image-vs-container)
 
-List all of the Docker Containers:
+__List all of the Docker Containers:__
 
 ~~~bash
 docker ps -a
@@ -91,7 +91,7 @@ Delete a container:
 docker rm <container-id>
 ~~~
 
-List all of the Docker Images:
+__List all of the Docker Images:__
 
 ~~~bash
 docker images
@@ -112,7 +112,7 @@ Don't forget to delete your old dad-jokes image that was built earlier.
 
 First, remove this line from your Docker file:
 
-~~~bash
+~~~dockerfile
 # Remove
 COPY ./dad-joke-logger.js /container
 ~~~
