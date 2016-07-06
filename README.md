@@ -60,10 +60,10 @@ docker build -t dad-jokes .
 Run the Docker Instance
 -----------------------
 
-The -v command mounts the files from the current directory into the Docker container.
+The --rm argument cleans up the files used by this Docker run after it completes.
 
 ~~~bash
-docker run dad-jokes
+docker run --rm dad-jokes
 ~~~
 
 Delete the Docker Dad Jokes Data (When no longer needed)
