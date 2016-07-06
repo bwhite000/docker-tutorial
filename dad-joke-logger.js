@@ -22,6 +22,6 @@ let dadJokesArr = [
     ],
     randomJokeNumber = Math.floor(Math.random() * dadJokesArr.length);
 
-//The code below logs out a random Dad Joke;
+// The code below logs out a random Dad Joke;
 // the random joke number index was already generated for you above.
 console.log(dadJokesArr[randomJokeNumber]);
