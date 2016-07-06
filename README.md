@@ -7,7 +7,7 @@ a silly Dad Jokes to the console.
 Install Docker
 --------------
 
-(Docker Download webpage)[https://www.docker.com/products/docker]
+[Docker Download webpage](https://www.docker.com/products/docker)
 
 Create the Dockerfile
 ---------------------
