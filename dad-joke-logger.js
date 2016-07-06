@@ -1,6 +1,7 @@
 //===============================//
 // Log a Dad Joke using NodeJS
 //===============================//
+"use strict";
 
 let dadJokesArr = [
         "Why do crabs never give to charity? Because they’re shellfish.",
@@ -21,6 +22,6 @@ let dadJokesArr = [
     ],
     randomJokeNumber = Math.floor(Math.random() * dadJokesArr.length);
 
-// Uncomment the code below to log out a Dad Joke;
+//The code below logs out a random Dad Joke;
 // the random joke number index was already generated for you above.
-//console.log(dadJokesArr[randomJokeNumber]);
+console.log(dadJokesArr[randomJokeNumber]);

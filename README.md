@@ -12,7 +12,9 @@ Install Docker
 Create the Dockerfile
 ---------------------
 
-Create a new file named "Dockerfile"
+Create a file named "Dockerfile" (it may have already been created in this example).
+This file is used for giving Docker the instruction on how to setup itself (the "image")
+and what command to run when it is called by Docker to run.
 
 Add the Docker setup commands
 -----------------------------
@@ -20,26 +22,36 @@ Add the Docker setup commands
 Copy and paste this into Dockerfile.
 
 ~~~bash
+# Create the Docker instance based on Ubuntu v16.04.
 FROM ubuntu:16.04
 
 MAINTAINER Your Fullname <your.email@example.com>
 
-# Install NodeJS
+# Install some dependencies.
 RUN apt-get update
-RUN curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-RUN sudo apt-get install -y nodejs
+RUN apt-get install -y curl
 
-# Create the directory for mounting external files (volumes) to.
+# Install NodeJS
+RUN curl -sL https://deb.nodesource.com/setup_6.x
+RUN apt-get install -y nodejs
+
+# Create the working directory for mounting external files to.
 RUN mkdir /container
 
-# Note that this directory is meant for mounting a volume to.
-VOLUME /container
+# Copy the Dad Jokes JS file into the container.
+COPY ./dad-joke-logger.js /container
 
-CMD node /container/dad-joke-logger.js
+# Put the working directory into Docker's context.
+WORKDIR /container
+
+# This command will run when Docker runs this container.
+CMD nodejs dad-joke-logger.js
 ~~~
 
 Build the Docker Container
 --------------------------
+
+Tag the container with a name by using the "-t" argument.
 
 ~~~bash
 docker build -t dad-jokes .
@@ -51,5 +63,69 @@ Run the Docker Instance
 The -v command mounts the files from the current directory into the Docker container.
 
 ~~~bash
-docker run -v ./:/container/ dad-jokes
+docker run dad-jokes
+~~~
+
+Delete the Docker Dad Jokes Data (When no longer needed)
+--------------------------------------------------------
+
+Docker Image vs. Container
+
+> An instance of an image is called container. You have an image, which is a set of layers as you describe. If you start this image, you have a running container of this image. You can have many running containers of the same image.
+
+> You can see all your images with docker images whereas you can see your running containers with docker ps (and you can see all containers with docker ps -a).
+
+> So a running image is a container.
+
+(source: http://stackoverflow.com/questions/23735149/docker-image-vs-container)
+
+List all of the Docker Containers:
+
+~~~bash
+docker ps -a
+~~~
+
+Delete a container:
+
+~~~bash
+docker rm <container-id>
+~~~
+
+List all of the Docker Images:
+
+~~~bash
+docker images
+~~~
+
+Find "dad-jokes" and copy the IMAGE ID. Then, use the image ID to delete the docker container.
+
+~~~bash
+docker rmi 87942608142f
+~~~
+
+Extra Credit (Mount external files into the Docker container)
+-------------------------------------------------------------
+
+Use a live copy of the Dad Jokes JS file by mounting a volume to the container.
+
+Don't forget to delete your old dad-jokes image that was built earlier.
+
+First, remove this line from your Docker file:
+
+~~~bash
+# Remove
+COPY ./dad-joke-logger.js /container
+~~~
+
+Then build again:
+
+~~~bash
+docker build -t dad-jokes .
+~~~
+
+Lastly, run the container using a mounted volumed. The -v command mounts the files from the
+current directory into the Docker container.
+
+~~~bash
+docker run -v ~/path/to/this/repo:/container dad-jokes
 ~~~
