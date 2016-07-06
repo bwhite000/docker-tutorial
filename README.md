@@ -2,7 +2,7 @@ Docker Tutorial
 ===============
 
 Follow this tutorial to learn how to make a simple Docker instance that prints out
-a silly Dad Joke to the console.
+a silly Dad Jokes to the console.
 
 Install Docker
 --------------
